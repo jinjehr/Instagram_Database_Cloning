@@ -25,7 +25,7 @@ connection.query(q, [data], function(err, result) {
 connection.end();
 
 
-#Sample_queries_with_faker
+/* Sample queries with faker */
 INSERT INTO users (email) VALUES('Katie34@yahoo.com'), ('Tunde@gmail.com');
 
 SELECT * FROM users;
@@ -49,7 +49,7 @@ connection.query(q, function (error, results, fields) {
   console.log(results);
 });
 
-#Easier_approach_that_allows_dynamic_data
+/* Easier approach that allows dynamic data */
 var person = {
     email: faker.internet.email(),
     created_at: faker.date.past()

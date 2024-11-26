@@ -3,7 +3,6 @@ SELECT * FROM users
 ORDER BY created_at
 LIMIT 5;
 
-
 -- 가장 회원가입을 많이한 요일 찾기
 SELECT 
     DAYNAME(created_at) AS day,
@@ -11,7 +10,6 @@ SELECT
     FROM users
 GROUP BY 1
 ORDER BY 2 DESC;
-
 
 -- 게시물을 올리지 않은 비활성 유적 찾기
 SELECT 
@@ -22,7 +20,6 @@ FROM
         LEFT JOIN
     photos AS P ON P.user_id = U.id
     WHERE P.image_url IS NULL;
-
 
 -- 좋아요가 가장 많은 게시물과 함께 그 정보찾기
 SELECT 
@@ -41,7 +38,6 @@ GROUP BY P.id
 ORDER BY 5 DESC
 LIMIT 10;
 
-
 -- 모든 유저에 대한 평균 게시물 수 구하기
 SELECT (SELECT COUNT(*) 
         FROM   photos) / (SELECT COUNT(*) 
@@ -57,7 +53,6 @@ SELECT (SELECT COUNT(*)
         FROM   comments) / (SELECT COUNT(*) 
                           FROM   users) AS avg_of_all_comments;
 
-
 -- 상위 검색된 10개의 해시태그 찾기
 SELECT T.tag_name, 
        COUNT(*) AS the_most_famous_tags 
@@ -67,7 +62,6 @@ FROM   photo_tags AS PT
 GROUP  BY T.id 
 ORDER  BY the_most_famous_tags  DESC 
 LIMIT  10;
-
 
 -- 게시물은 없지만 좋아요와 댓글은 있는 계정찾기
 SELECT username, 

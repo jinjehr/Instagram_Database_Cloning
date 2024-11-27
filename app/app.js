@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var faker = require('faker');
+var express = require('express');
 
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -11,6 +12,34 @@ for(var i = 0; i < 500; i++){
   console.log("HELLO WORLD!");
 }
 
+var app = express();
+
+app.get("/", function(req, res){
+ res.send("HELLO FROM OUR WEB APP!");
+});
+ 
+app.listen(8080, function () {
+ console.log('App listening on port 8080!');
+});
+
+app.get("/joke", function(req, res){
+ var joke = "What do you call a dog that does magic tricks? A labracadabrador.";
+ res.send(joke);
+});
+
+app.get("/random_num", function(req, res){
+ var num = Math.floor((Math.random() * 10) + 1);
+ res.send("Your lucky number is " + num);
+});
+
+app.post('/register', function(req,res){
+ var person = {email: req.body.email};
+ connection.query('INSERT INTO users SET ?', person, function(err, result) {
+ console.log(err);
+ console.log(result);
+ res.redirect("/");
+ });
+});
 // Execute file with:
 // node filename.js
 
